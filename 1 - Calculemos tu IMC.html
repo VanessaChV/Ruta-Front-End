@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+    <html lang="es">
+
+        <head >
+
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width">
+            <title>Calculemos tu IMC?</title>
+            <link rel="stylesheet" href="reset.css">
+            <link rel="stylesheet" href="style-IMC.css">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+
+        </head>
+
+        <body>
+
+            <dl>
+                <dt><h1>¿Qué es el IMC?</h1></dt>
+                <dd>El <strong>índice de masa corporal</strong> es un indicador que permite saber si tu peso es saludable o no.</dd>
+            </dl>
+
+                <script>
+
+                //Va a aparecer un pop up preguntando esta información y luego se guardará para realizar el cálculo:
+
+                function saltarLinea() {
+
+                document.write("<br>");    
+                document.write("<br>");    
+                document.write("<br>"); 
+
+                }  
+
+                function imprimir(frase) {
+
+                document.write(frase);
+                saltarLinea();
+
+                }
+
+                function calcularImc(peso, altura, nombre) {
+
+                return(peso / (altura * altura));
+
+                }
+
+                //Si lo quiero hacer más personalizado:
+
+                nombre = prompt("¿Cómo te llamás?");
+                pesoInformado = prompt(nombre + ", ¿Cuánto pesás?");
+                alturaInformada = prompt(nombre + ", ¿Cuánto medís?");
+
+                imcCalculado = calcularImc(pesoInformado, alturaInformada);
+
+                imprimir(nombre + ", tu IMC es: " + Math.round(imcCalculado) + ".");
+
+                </script>
+
+        </body>
+    
+    </html>
