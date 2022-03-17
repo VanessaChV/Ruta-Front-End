@@ -1,0 +1,44 @@
+<meta charset="UTF-8">
+
+<h2>02 06 | Calcular el promedio de las edades de una familia</h2>
+
+<script>
+
+function saltarLinea() {
+
+    document.write("<br>");    
+    document.write("<br>");    
+    document.write("<br>"); 
+
+}  
+
+function imprimir(frase) {
+
+    document.write(frase);
+    saltarLinea();
+
+}
+
+// 1 - Le pregunto al usuario cuántos miembros tiene la familia.
+
+var   numeroMiembros = parseInt(prompt("¿Cuántos miembros tiene tu familia?"));
+
+// 2 - Declaro variables de contador y totalEdades para cálculo de promedio:
+
+var contador = 1;
+var totalEdades = 0; 
+
+while (contador <= numeroMiembros) {
+
+    edad = parseInt(prompt("¿Cuántos años tiene tu familiar?"));
+    totalEdades = totalEdades + edad;
+    contador++;
+
+}
+
+var promedioEdad = totalEdades / numeroMiembros;
+
+imprimir("El promedio de las edades de tu familia es de " + Math.round(promedioEdad) + ".");
+
+
+</script>

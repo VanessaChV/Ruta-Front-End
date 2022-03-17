@@ -1,0 +1,67 @@
+<meta charset="UTF-8">
+
+<h2>02 01 08 | Juego adivina, adivinador!</h2>
+
+<script>
+
+// Va a aparecer un pop up preguntando esta información y luego se guardará para realizar el cálculo:
+
+function saltarLinea() {
+
+    document.write("<br>");    
+    document.write("<br>");    
+    document.write("<br>"); 
+
+}  
+
+function imprimir(frase) {
+
+    document.write(frase);
+    saltarLinea();
+
+}
+
+// El usuario tiene que adivinar el número que elegí.
+
+// var numeroProgramado = 3;
+// var numeroUsuario = parseInt(prompt("Elegí un número entre 0 y 10"));
+
+// if (numeroProgramado == numeroUsuario){
+    
+//    imprimir("Felicitaciones, acertaste!");
+
+// }
+
+// if (numeroProgramado != numeroUsuario){
+
+//    imprimir("Mmm incorrecto, otra oportunidad!");
+
+// }
+
+// Ahora el sistema siempre va a tener un n° random, entonces el juego no terminará una vez que se adivina:
+
+var numeroProgramado = Math.round(Math.random()*10);
+var numeroUsuario = parseInt(prompt("Elegí un número entre 0 y 10"));
+
+// if (numeroProgramado == numeroUsuario){
+//    imprimir("Felicitaciones, acertaste!");
+// }
+
+// if (numeroProgramado != numeroUsuario){
+//    imprimir("Mmm incorrecto, otra oportunidad!");
+// }
+
+// Si sólo hay dos opciones (true or false), puedo simplificar mi código a un IF:
+
+if (numeroProgramado == numeroUsuario){
+    
+    imprimir("Felicitaciones, acertaste!");
+
+} else {
+
+    imprimir("Mmm incorrecto... El número pensado era " + numeroProgramado + ".");
+
+}
+
+
+</script>

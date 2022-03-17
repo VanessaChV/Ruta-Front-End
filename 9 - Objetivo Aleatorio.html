@@ -1,0 +1,98 @@
+<canvas width="600" height="400"> </canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    
+    pincel.fillStyle = "lightgre";
+    pincel.fillRect(0,0,600,400); 
+
+    var radio = 10;; // Creo una variable de radio para reutilizarla y padronizar el tamaño de los radios.
+
+function disenarCircunferencia(x, y, radio, color) {
+
+    pincel.fillStyle = color;
+    pincel.beginPath();
+    pincel.arc(x, y, radio, 0, 2*Math.PI);
+    pincel.fill();
+
+}
+
+function limpiarPantalla() {
+    pincel.clearRect(0, 0, 600, 400)// Función para limpiar la pantalla
+}
+
+// Como necesito que el objetivo se vaya moviendo, 
+// voy a crear una función en la que diseñe el objetivo:
+
+function crearObjetivo(x, y) { // Le defino el parámetro de las coordenadas
+
+    disenarCircunferencia(x, y, radio + 20, "orange");
+    disenarCircunferencia(x, y, radio + 10, "white");
+    disenarCircunferencia(x, y, radio, "orange");
+
+}
+
+// Cómo defino esas coordenadas que le voy a pasar? Defino 2 variables aleatorias:
+
+// var xAleatorio = 150;
+// var yAleatorio = 200;
+
+// Entonces mi función objetivo va a tomar estas variables como parámetros
+
+// crearObjetivo(xAleatorio, yAleatorio);
+
+// Creo la posición aleatoria a través de una función,
+// teniendo en cuenta la dimensión de mi canvas:
+
+function sortearPosicion(maximo){
+    
+    return Math.floor(Math.random()*maximo); // Por máximo para que no se salga del canvas.
+}
+
+// Crear el disparo automático aleatorio:
+
+var x = 0;
+
+function actualizarPantalla() { // Para que de la sensación de que desaparece, crear circunferencia y desaparecer.
+
+    limpiarPantalla();
+    xAleatorio = sortearPosicion(600);
+    yAleatorio = sortearPosicion(400);
+    crearObjetivo(xAleatorio, yAleatorio);
+    x++;
+
+}
+
+setInterval(actualizarPantalla, 1000);
+
+// Cada vez que intente hacer click en el centro de mi circunferencia, 
+// debe aparecer un msj diciendo si acerté o no el "tiro".
+// Como es un área, tengo que darle un área al que corresponde ese circunferencia pequeña.
+
+// 1- Capturo evento del click, por lo que creo una función que al momento del click me lance un alerta.
+
+    var xAleatorio;
+    var yAleatorio;
+
+function disparar(evento) {
+
+    var x = evento.pageX - pantalla.offsetLeft;
+    var y = evento.pageY - pantalla.offsetTop;
+    
+    // Para que mi tiro sea certero, tengo que cumplir con 4 condiciones:
+        if ((x < xAleatorio + radio) &&        
+            (x > xAleatorio - radio) &&
+            (y < yAleatorio + radio) &&
+            (y > yAleatorio - radio)) {
+
+            alert("Felicitaciones, acertaste!");
+
+        }
+    
+}
+
+pantalla.onclick = disparar;
+
+</script> 

@@ -1,0 +1,32 @@
+<meta charset="UTF-8">
+
+<h2>¿Será que podés manejar? Averigüémoslo!!</h2>
+
+<script>
+
+// Este programa, de acuerdo con la respuesta del usuario, debe mostrar el mensaje "Podéss manejar" o "No podés manejar". 
+// Recuerda que puede conducir solo quien tiene 18 años o más y también quien tiene una licencia de conducir.
+
+function saltarLinea() {
+        document.write("<br>");
+    }
+
+    function imprimir(frase) {
+        document.write(frase);
+        saltarLinea();
+    }
+
+    var edad = parseInt(prompt("¿Cuántos años tenés?"));
+    var tieneLicencia = prompt("¿Tenés licencia de conducir? Respondé s (si tenés licencia) o n (si NO tenés)");
+
+    if (edad >= 18 && tieneLicencia == "s") {
+
+        imprimir("Felicitaciones, podés manejar!");
+
+    } else {
+
+        imprimir("Todavía no podés manejar.");
+
+}
+
+</script>

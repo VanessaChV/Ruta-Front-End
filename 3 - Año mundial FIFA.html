@@ -1,0 +1,51 @@
+<meta charset="UTF-8">
+
+<h2>02 02 | Año mundial FIFA</h2>
+
+<script>
+
+function saltarLinea() {
+
+    document.write("<br>");    
+    document.write("<br>");    
+    document.write("<br>"); 
+
+}  
+
+function imprimir(frase) {
+
+    document.write(frase);
+    saltarLinea();
+
+}
+
+// Quiero que mi programa me muestre los años en que se jugó mundial desde 1930...
+
+// 1 - Creo la variable y le asigno valor:
+
+// var añoMundial = 1930;
+
+// alert("En el año " + añoMundial + ", hubo mundial en la FIFA.");
+
+// añoMundial = añoMundial + 4;
+// alert("En el año " + añoMundial + ", hubo mundial en la FIFA.");
+
+// 2 - Para que lo haga automático y no tenga que estar sumando de a
+// uno, creo un bucle, el famoso WHILE:
+
+var añoMundial = 1930;
+
+// Si quiero ponerle un límite al cálculo:
+
+var limite = parseInt(prompt("¿Hasta qué año querés que lo calcule?"))
+
+while (añoMundial < limite) {
+
+    imprimir("En el año " + añoMundial + ", hubo mundial en la FIFA.");
+    añoMundial = añoMundial + 4;
+
+}
+
+// Uso ALERT si quiero ir haciendo click para que aparezca c/u o uso IMPRIMIR, para que muestre el listado de una...
+
+</script>

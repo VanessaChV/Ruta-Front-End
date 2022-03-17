@@ -1,0 +1,47 @@
+<canvas width="600" height="400"> </canvas>
+
+<script>
+
+// Desafío: cada vez que el usuario haga click con el botón derecho, el círculo cambiará de color, 
+// pasando de azul a rojo y a verde. Y seguirán apareciendo con el botón izquierdo.
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400); 
+
+// El primer paso será crear dos variables: un array de los colores, y un índice del color actual seleccionado.
+    
+    var colores = ["blue", "red", "green"];        
+    var indiceColorActual = 0; // Empieza con blue
+    
+    function dibujarCirculo(evento) {
+       
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;    
+        
+        pincel.fillStyle = colores[indiceColorActual]; // definimos el color pasado para pincel.fillStyle, usando el índice y nuestro array de colores. Para obtener un color del array necesitamos de su índice (posición), la primera vez que el usuario abre la aplicación el valor del indiceColorActual es 0, que es el índice para el color blue.
+        pincel.beginPath();
+        pincel.arc(x,y,10,0,2*3.14);
+        pincel.fill();
+        console.log(x + "," + y);        
+        
+    }
+
+    pantalla.onclick = dibujarCirculo;
+
+    function alterarColor() {
+        
+        indiceColorActual++;
+        
+        if(indiceColorActual>= colores.length) {
+             indiceColorActual = 0; // Vuelve al primer color, blue.
+        }
+
+        return false; // Creada para que el menú contextual padrón de canvas no sea exhibido.
+   
+    }
+
+    pantalla.oncontextmenu = alterarColor; // Captura el evento cuando el usuario hace click en el botón DERECHO. 
+
+</script> 

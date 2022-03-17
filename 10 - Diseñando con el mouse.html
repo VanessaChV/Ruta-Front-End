@@ -1,0 +1,165 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    
+/* DESAFÍO: poder cambiar el color del pincel, haciendo click en una paleta de colores en el extremo 
+izquierdo superior (rojo, verde y azul).
+*/
+
+    var pantalla = document.querySelector('canvas');
+    var pincel = pantalla.getContext('2d');
+
+    pincel.fillStyle = 'lightgrey';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var puedoDibujar = false;
+
+// 1 - Crear los cuadrados de la paleta (50 x 50):
+
+function dibujarCuadrado(x,y,colorC) {
+
+    pincel.fillStyle = colorC;
+    pincel.fillRect(x,y,50,50); 
+    pincel.fill();
+
+} 
+
+// 2 - Crear paleta de colores:
+
+function paletaColores() {
+
+    var yCuadrado = 0;
+
+    dibujarCuadrado(0,yCuadrado,"red");
+    dibujarCuadrado(50,yCuadrado,"green");
+    dibujarCuadrado(100,yCuadrado,"blue");
+
+}
+
+paletaColores();
+
+/* 3 - Crear lógica que al momento de hacer click el color del pincel cambie de color:
+
+Cuando el usuario haga click en el cuadrado verde, el pincel diseñará círculos verdes, 
+cuando haga clic en el rojo, diseñará círculos rojos, y así sucesivamente, recordando 
+que el color inicial (default) es el azul. 
+
+*/ 
+
+/* 3.a.1 - Importante! Restringir el área de la paleta para no poder diseñar nada encima de ella.
+
+Si el mouse se encuentra posicionado entre las coordenadas X=0 y X=155, y entre Y=0 y Y=55, 
+no podrá diseñar, incluso cuando el botón izquierdo del mouse esté presionado. 
+*/ 
+
+function areaHabilitada(xCoordenada,yCoordenada){
+
+    if ((xCoordenada >= 0 && xCoordenada < 155) && (yCoordenada >=0 && yCoordenada < 55)) { // Sumé el radio de la circunferencia también (5), porque en caso de que el usuario grafique en el borde inferior o borde derecho de la paleta se corre el riesgo de que se grafique una parte del círculo dentro de la paleta.
+
+    return false;
+
+    } else {
+
+    return true;
+
+    }
+
+}    
+
+/*Pero para poder acceder a las coordenadas del mouse necesito usar el evento onmousemove que es parte 
+de nuestro objeto pantalla, dicho evento anteriormente estaba asociado directamente a la función dibujarCirculo.
+
+Ahora lo voy a asociar con una nueva función que creo: capturarMovimientoDelMouse y que recibirá como parámetro 
+el evento de mover el mouse. En esta función capturarMovimientoDelMouse vamos a guardar las variables de las 
+coordenadas X y Y, y dentro de la misma función voy a crear un if para verificar si el mouse está localizado en 
+el área restringida, si no estuviera llamo a la función dibujarCirculo.
+*/
+
+function capturarMovimientoDelMouse(evento){
+
+    var x = evento.pageX - pantalla.offsetLeft;
+    var y = evento.pageY - pantalla.offsetTop;
+
+    if (areaHabilitada(x,y)){
+
+        dibujarCirculo(x,y,color);
+
+    }
+
+}
+
+pantalla.onmousemove = capturarMovimientoDelMouse;
+
+/* Además debo alterar la función dibujarCirculo, ya que ahora recibirá como parámetro las coordenadas (x,y) del click
+del mouse cuando desee graficar:
+*/
+
+function dibujarCirculo(x,y,color) {
+
+    if(puedoDibujar) {
+
+        pincel.fillStyle = color;
+        pincel.beginPath();
+        pincel.arc(x, y, 5, 0, 2 * 3.14);
+        pincel.fill();
+
+    }
+}
+
+
+    pantalla.onmousedown = habilitarDibujar;
+
+    pantalla.onmouseup = deshabilitarDibujar;
+
+// 3.a.2 - Crear la lógica que al momento de hacer click el color del pincel cambie:
+
+/* Para ello, primero crear una variable colorActual (color blue por defecto).
+*/
+    var color = "blue";
+
+/*    Luego, detectar color de la paleta seleccionado, a través de la función seleccionarColor que 
+se asociará al evento onclick de la pantalla.
+*/
+
+function seleccionarColor(evento) {
+
+    var x = evento.pageX - pantalla.offsetLeft;
+    var y = evento.pageY - pantalla.offsetTop;
+
+    //Cada condición altera el color de la variable color
+
+    //Comenzamos por la condición del eje Y que es común para todas
+    if (y > 0 && y < 50) {
+
+        if(x > 0 && x < 50) {
+
+            color = "red";
+            console.log(color);
+
+        } else if (x > 50 && x < 100) {
+
+            color = "green";
+
+        } else if(x > 100 && x < 150) {
+
+            color = "blue";
+
+        }            
+
+    }
+
+}
+
+pantalla.onclick = seleccionarColor;
+
+function habilitarDibujar() {
+
+puedoDibujar = true;
+}
+
+function deshabilitarDibujar() {
+
+puedoDibujar = false;
+}
+
+</script>

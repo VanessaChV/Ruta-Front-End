@@ -1,0 +1,59 @@
+<meta charset="UTF-8">
+
+<h2>02 02 08 | Interrumpiendo una Repetición</h2>
+
+<script>
+
+function saltarLinea() {
+
+    document.write("<br>");    
+    document.write("<br>");    
+    document.write("<br>"); 
+
+}  
+
+function imprimir(frase) {
+
+    document.write(frase);
+    saltarLinea();
+
+}
+
+// El usuario tiene que adivinar el número que elegí, y tiene 3 oportunidades. Por lo que voy a usar un pop up y un while:
+
+var numeroProgramado = Math.round(Math.random()*10);
+var intentos = 3; // oportunidades que tiene para adivinar
+var contador = 1; // en el while siempre empieza con un n°
+
+while (contador <= intentos) {
+
+    var numeroUsuario = parseInt(prompt("Elegí un n° entre 0 y 10"));
+
+    if (numeroProgramado == numeroUsuario){
+    
+    alert("Felicitaciones, acertaste!");
+    break;
+
+    } else {
+
+        alert("Mmm incorrecto... Otra oportunidad.");
+
+    }
+
+    contador++;
+
+    }
+
+if (numeroProgramado == numeroUsuario) {
+    
+    imprimir("Felicitaciones, acertaste en el intento " + contador + ".");
+
+    } else {
+
+    imprimir("El n° pensado era " + numeroProgramado + ".");
+
+    }
+
+    imprimir("Gracias por jugar conmigo! ¿Intentamos otra vez?");
+
+</script>

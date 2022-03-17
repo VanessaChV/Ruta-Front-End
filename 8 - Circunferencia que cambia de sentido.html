@@ -1,0 +1,51 @@
+<canvas width="600" height="400"> </canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    
+    pincel.fillStyle = "lightgrey";
+    pincel.fillRect(0,0,600,400); 
+
+// Desafío: crear una función para crear circunferencias a lo largo del ancho del canvas, que de la sensación que está viajando en el espacio:
+
+function disenarCircunferencia(x, y, radio) {
+
+    pincel.fillStyle = "orange";
+    pincel.beginPath();
+    pincel.arc(x, y, radio, 0, 2*Math.PI);
+    pincel.fill();
+
+}
+
+function limpiarPantalla() {
+    pincel.clearRect(0, 0, 600, 400)// Función para limpiar la pantalla
+}
+
+// Desafío: el círculo ni bien llegue al extremo derecho de la pantalla debe volver en sentido contrario
+// (de derecha a izquierda), y cuando retorne al lugar inicial (lado izquierdo), nuevamente se mueva de
+// izquierda a derecha, y así sucesivamente, yendo y volviendo eternamente.
+
+// Para saber si el círculo va de izquierda a derecha o de derecha a izquierda, necesito descubrir su sentido. 
+// Por lo que creo ja variable sentido:
+
+var x = 0;
+var sentido = 1; 
+
+function actualizarPantalla() { // Para que de la sensación de que desaparece, crear circunferencia y desaparecer.
+
+    limpiarPantalla();
+    if (x > 600) { //Antes de llamar a disenarCircunferencia verifico si necesito alterar el valor de sentido.
+        sentido = -1;
+    } else if (x < 0) {
+        sentido = 1;
+    }
+    disenarCircunferencia(x, 20, 20);
+    x = x + sentido;
+
+}
+
+setInterval(actualizarPantalla, 5); // Le paso actualizarPantalla como parámetro, por eso no le pongo paréntesis.
+
+</script> 
